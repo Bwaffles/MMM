@@ -1,45 +1,12 @@
 ﻿@model IEnumerable<Application.Movies.Queries.GetMoviesList.MoviesListItemModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Movies";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReleaseYear)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tagline)
-        </th>
-        <th></th>
-    </tr>
+<h2>Movies</h2>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReleaseYear)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tagline)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+    <h3>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToString(), "Details", new { /* id=item.PrimaryKey */ }, new { @style="color:gray"})</h3>
+    <label>@Html.DisplayFor(modelItem => item.Tagline)</label>
 }
-
-</table>

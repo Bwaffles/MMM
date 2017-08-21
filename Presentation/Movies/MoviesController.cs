@@ -27,30 +27,6 @@ namespace Presentation.Movie
             return View();
         }
 
-        // GET: Movie/Create
-        [Route("create")]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Movie/Create
-        [Route("create")]
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: Movie/Edit/5
         //public ActionResult Edit(int id)
         //{

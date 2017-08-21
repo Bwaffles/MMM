@@ -19,8 +19,7 @@ namespace Application.Movies.Queries.GetMoviesList
                 new MoviesListItemModel()
                 {
                     Tagline = movie.Tagline,
-                    Title = movie.Title,
-                    ReleaseYear = movie.ReleaseDate?.Year,
+                    Title = $"{movie.Title} ({movie.ReleaseDate?.Year})",
                 });
         }
     }
