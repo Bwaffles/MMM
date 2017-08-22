@@ -1,15 +1,13 @@
 ﻿using Application;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq.Expressions;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
 using Dapper;
 using Domain;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Persistance.Repositories
 {
@@ -76,18 +74,18 @@ namespace Persistance.Repositories
             return items;
         }
 
-        public T FindByID(Guid id)
+        //TODO: no nulls-- look into optional object
+        public T FindByID(int id)
         {
-            throw new NotImplementedException();
-            //T item = default(T);
+            T item = default(T);
 
-            //using (IDbConnection connection = Connection)
-            //{
-            //    connection.Open();
-            //    item = connection.Query<T>("SELECT * FROM " + tableName + " WHERE Id=@Id", new { Id = id }).SingleOrDefault();
-            //}
+            using (IDbConnection connection = Connection)
+            {
+                connection.Open();
+                item = connection.Query<T>("SELECT * FROM " + tableName + " WHERE Id=@Id", new { Id = id }).SingleOrDefault();
+            }
 
-            //return item;
+            return item;
         }
 
         public void Remove(T item)

@@ -18,6 +18,7 @@ namespace Application.Movies.Queries.GetMoviesList
             return movieRepository.FindAll().Select(movie =>
                 new MoviesListItemModel()
                 {
+                    Id = movie.Id,
                     Tagline = movie.Tagline,
                     Title = $"{movie.Title} ({movie.ReleaseDate?.Year})",
                 });

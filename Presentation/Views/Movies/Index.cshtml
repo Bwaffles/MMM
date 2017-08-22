@@ -6,7 +6,8 @@
 
 <h2>Movies</h2>
 
-@foreach (var item in Model) {
-    <h3>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToString(), "Details", new { /* id=item.PrimaryKey */ }, new { @style="color:gray"})</h3>
+@foreach (var item in Model)
+{
+    <h3>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToString(), "Details", new { id = item.Id }, new { @style = "color:gray" })</h3>
     <label>@Html.DisplayFor(modelItem => item.Tagline)</label>
 }

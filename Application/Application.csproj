@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Movies\Queries\GetMovieDetails\GetMovieDetailsQuery.cs" />
+    <Compile Include="Movies\Queries\GetMovieDetails\IGetMovieDetailsQuery.cs" />
+    <Compile Include="Movies\Queries\GetMovieDetails\MovieDetailsModel.cs" />
     <Compile Include="Repositories\IMovieRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Movies\Queries\GetMoviesList\GetMoviesListQuery.cs" />

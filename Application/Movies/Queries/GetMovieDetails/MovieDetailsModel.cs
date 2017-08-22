@@ -1,18 +1,11 @@
 ﻿using System;
 
-namespace Domain
+namespace Application.Movies.Queries.GetMovieDetails
 {
-    public class Movie : IEntity
+    public class MovieDetailsModel
     {
-        public string BackdropPath { get; set; }
         public long Budget { get; set; }
-        public string Homepage { get; set; }
-        public int Id { get; set; }
-        public string ImdbId { get; set; }
-        public string OriginalLanguage { get; set; }
-        public string OriginalTitle { get; set; }
         public string Overview { get; set; }
-        public double Popularity { get; set; }
         public string PosterPath { get; set; }
         public DateTime? ReleaseDate { get; set; }
         public long Revenue { get; set; }
