@@ -1,8 +1,5 @@
-using System;
 using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
-using Application.Movies.Queries.GetMoviesList;
-using Application.Repositories;
+using System;
 
 namespace Presentation.App_Start
 {

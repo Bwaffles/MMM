@@ -2,7 +2,7 @@
 using Application.Movies.Queries.GetMoviesList;
 using System.Web.Mvc;
 
-namespace Presentation.Movie
+namespace Presentation.Controllers
 {
     public class MoviesController : Controller
     {

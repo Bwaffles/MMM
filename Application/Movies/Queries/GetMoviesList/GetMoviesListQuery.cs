@@ -1,5 +1,4 @@
-﻿using Application.Repositories;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Application.Movies.Queries.GetMoviesList

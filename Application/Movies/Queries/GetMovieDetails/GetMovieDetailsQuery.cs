@@ -1,6 +1,4 @@
-﻿using Application.Repositories;
-
-namespace Application.Movies.Queries.GetMovieDetails
+﻿namespace Application.Movies.Queries.GetMovieDetails
 {
     public class GetMovieDetailsQuery : IGetMovieDetailsQuery
     {
