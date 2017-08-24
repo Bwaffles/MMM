@@ -13,7 +13,7 @@ namespace Persistance.Repositories
 {
     public abstract class Repository<T> : IRepository<T> where T : IEntity
     {
-        private readonly string tableName;
+        protected readonly string tableName;
 
         internal IDbConnection Connection
         {
@@ -33,7 +33,7 @@ namespace Persistance.Repositories
             return item;
         }
 
-        public void Add(T item)
+        public virtual void Add(T item)
         {
             throw new NotImplementedException();
             //using (IDbConnection connection = Connection)
@@ -44,7 +44,7 @@ namespace Persistance.Repositories
             //}
         }
         
-        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
+        public virtual IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
         {
             throw new NotImplementedException();
             //IEnumerable<T> items = null;
@@ -61,7 +61,7 @@ namespace Persistance.Repositories
             //return items;
         }
 
-        public IEnumerable<T> FindAll()
+        public virtual IEnumerable<T> FindAll()
         {
             IEnumerable<T> items = null;
 
@@ -75,7 +75,7 @@ namespace Persistance.Repositories
         }
 
         //TODO: no nulls-- look into optional object
-        public T FindByID(int id)
+        public virtual T FindByID(int id)
         {
             T item = default(T);
 
@@ -88,7 +88,7 @@ namespace Persistance.Repositories
             return item;
         }
 
-        public void Remove(T item)
+        public virtual void Remove(T item)
         {
             throw new NotImplementedException();
             //using (IDbConnection connection = Connection)
@@ -98,7 +98,7 @@ namespace Persistance.Repositories
             //}
         }
 
-        public void Update(T item)
+        public virtual void Update(T item)
         {
             throw new NotImplementedException();
             //using (IDbConnection connection = Connection)

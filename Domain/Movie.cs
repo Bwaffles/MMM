@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -6,6 +7,7 @@ namespace Domain
     {
         public string BackdropPath { get; set; }
         public long Budget { get; set; }
+        public IEnumerable<Genre> Genres { get; set; }
         public string Homepage { get; set; }
         public int Id { get; set; }
         public string ImdbId { get; set; }

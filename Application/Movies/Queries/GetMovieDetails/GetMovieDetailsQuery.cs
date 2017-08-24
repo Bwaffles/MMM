@@ -1,4 +1,8 @@
-﻿namespace Application.Movies.Queries.GetMovieDetails
+﻿using Domain;
+using Mapster;
+using System.Linq;
+
+namespace Application.Movies.Queries.GetMovieDetails
 {
     public class GetMovieDetailsQuery : IGetMovieDetailsQuery
     {
@@ -14,19 +18,14 @@
             var movie = movieRepository.FindByID(id);
             if (movie == null)
                 return null;
+            
+            TypeAdapterConfig<Movie, MovieDetailsModel>
+                .NewConfig()
+                .Map(dest => dest.Title, 
+                     src => string.Format("{0} ({1})", src.Title, (src.ReleaseDate.HasValue ? src.ReleaseDate.Value.Year.ToString() : string.Empty)))
+                .Map(dest => dest.Genres, src => string.Join(", ", src.Genres.Select(genre => genre.Name)));
 
-            return new MovieDetailsModel()
-            {
-                Budget = movie.Budget,
-                Overview = movie.Overview,
-                PosterPath = movie.PosterPath,
-                ReleaseDate = movie.ReleaseDate,
-                Revenue = movie.Revenue,
-                Runtime = movie.Runtime,
-                Status = movie.Status,
-                Tagline = movie.Tagline,
-                Title = $"{movie.Title} ({movie.ReleaseDate?.Year})",
-            };
+            return movie.Adapt<MovieDetailsModel>();
         }
     }
 }

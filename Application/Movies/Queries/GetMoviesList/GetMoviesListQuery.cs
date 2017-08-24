@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Domain;
+using Mapster;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Application.Movies.Queries.GetMoviesList
@@ -14,13 +16,12 @@ namespace Application.Movies.Queries.GetMoviesList
 
         public IEnumerable<MoviesListItemModel> Execute()
         {
-            return movieRepository.FindAll().Select(movie =>
-                new MoviesListItemModel()
-                {
-                    Id = movie.Id,
-                    Tagline = movie.Tagline,
-                    Title = $"{movie.Title} ({movie.ReleaseDate?.Year})",
-                });
+            TypeAdapterConfig<Movie, MoviesListItemModel>
+                .NewConfig()
+                .Map(dest => dest.Title,
+                     src => string.Format("{0} ({1})", src.Title, (src.ReleaseDate.HasValue ? src.ReleaseDate.Value.Year.ToString() : string.Empty)));
+
+            return movieRepository.FindAll().AsQueryable().ProjectToType<MoviesListItemModel>();
         }
     }
 }

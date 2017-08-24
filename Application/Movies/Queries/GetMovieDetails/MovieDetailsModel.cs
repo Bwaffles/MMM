@@ -5,6 +5,7 @@ namespace Application.Movies.Queries.GetMovieDetails
     public class MovieDetailsModel
     {
         public long Budget { get; set; }
+        public string Genres { get; set; }
         public string Overview { get; set; }
         public string PosterPath { get; set; }
         public DateTime? ReleaseDate { get; set; }
