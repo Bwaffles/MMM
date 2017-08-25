@@ -33,7 +33,8 @@ namespace Application.UnitTests.Movies.Queries
                 Status = Status,
                 Tagline = Tagline,
                 Title = Title,
-                Genres = new List<Genre>() { new Genre() { Name = "1" }, new Genre() { Name = "2" } }
+                Genres = new List<Genre>() { new Genre() { Name = "1" }, new Genre() { Name = "2" } },
+                SpokenLanguages = new List<Language>() { new Language() { Code = "en" }, new Language() { Code = "es" } }
             };
         }
     }

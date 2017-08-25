@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Mapster;
+using System.Globalization;
 using System.Linq;
 
 namespace Application.Movies.Queries.GetMovieDetails
@@ -23,6 +24,7 @@ namespace Application.Movies.Queries.GetMovieDetails
                 .NewConfig()
                 .Map(dest => dest.Title, 
                      src => string.Format("{0} ({1})", src.Title, (src.ReleaseDate.HasValue ? src.ReleaseDate.Value.Year.ToString() : string.Empty)))
+                .Map(dest => dest.Languages, src => string.Join(", ", src.SpokenLanguages.Select(language => CultureInfo.GetCultureInfo(language.Code).DisplayName)))
                 .Map(dest => dest.Genres, src => string.Join(", ", src.Genres.Select(genre => genre.Name)));
 
             return movie.Adapt<MovieDetailsModel>();

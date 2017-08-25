@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Application.Movies.Queries.GetMovieDetails
 {
@@ -6,6 +7,8 @@ namespace Application.Movies.Queries.GetMovieDetails
     {
         public long Budget { get; set; }
         public string Genres { get; set; }
+        [Display(Name="Spoken Languages")]
+        public string Languages { get; set; }
         public string Overview { get; set; }
         public string PosterPath { get; set; }
         public DateTime? ReleaseDate { get; set; }

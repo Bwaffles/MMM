@@ -19,6 +19,7 @@ namespace Domain
         public DateTime? ReleaseDate { get; set; }
         public long Revenue { get; set; }
         public int? Runtime { get; set; }
+        public IEnumerable<Language> SpokenLanguages { get; set; }
         public string Status { get; set; }
         public string Tagline { get; set; }
         public string Title { get; set; }

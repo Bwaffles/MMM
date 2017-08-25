@@ -1,6 +1,10 @@
 ﻿using Application.Movies;
+using Dapper;
 using Domain;
 using Persistance.Repositories;
+using Slapper;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Persistance
 {
@@ -10,12 +14,26 @@ namespace Persistance
 
         public override Movie FindByID(int id)
         {
-            var movie = base.FindByID(id);
+            Movie item;
 
-            var genreRepository = new GenreRepository();
-            movie.Genres = genreRepository.FindByMovieId(id);
+            using (var connection = Connection)
+            {
+                var sql = "SELECT m.*, "
+                        + "g.Id as Genres_Id, g.Name as Genres_Name, "
+                        + "l.Id as SpokenLanguages_Id, l.Code SpokenLanguages_Code "
+                        + $"FROM {tableName} m "
+                        + "INNER JOIN MovieGenre mg on mg.MovieId = m.Id "
+                        + "INNER JOIN Genre g on g.Id = mg.GenreId "
+                        + "INNER JOIN MovieLanguage ml on ml.MovieId = m.Id "
+                        + "INNER JOIN Language l on l.Id = ml.LanguageId "
+                        + "WHERE m.Id = @Id";
 
-            return movie;
+                connection.Open();
+                var query = connection.Query(sql, new { Id = id }) as IEnumerable<IDictionary<string, object>>;
+                item = AutoMapper.Map<Movie>(query).SingleOrDefault();
+            }
+
+            return item;
         }
     }
 }
