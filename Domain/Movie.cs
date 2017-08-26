@@ -11,7 +11,6 @@ namespace Domain
         public string Homepage { get; set; }
         public int Id { get; set; }
         public string ImdbId { get; set; }
-        public string OriginalLanguage { get; set; }
         public string OriginalTitle { get; set; }
         public string Overview { get; set; }
         public double Popularity { get; set; }
@@ -20,7 +19,7 @@ namespace Domain
         public DateTime? ReleaseDate { get; set; }
         public long Revenue { get; set; }
         public int? Runtime { get; set; }
-        public IEnumerable<Language> SpokenLanguages { get; set; }
+        public IEnumerable<MovieLanguage> SpokenLanguages { get; set; }
         public string Status { get; set; }
         public string Tagline { get; set; }
         public string Title { get; set; }

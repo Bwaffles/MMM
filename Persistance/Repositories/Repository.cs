@@ -1,8 +1,10 @@
 ﻿using Application;
 using Dapper;
 using Domain;
+using Slapper;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -26,11 +28,8 @@ namespace Persistance.Repositories
         public Repository(string tableName)
         {
             this.tableName = tableName;
-        }
 
-        internal virtual dynamic Mapping(T item)
-        {
-            return item;
+            AutoMapper.Configuration.IdentifierAttributeType = typeof(KeyAttribute);
         }
 
         public virtual void Add(T item)
@@ -43,7 +42,7 @@ namespace Persistance.Repositories
             //    item.Id = connection.Insert<int>(tableName, parameters);
             //}
         }
-        
+
         public virtual IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
         {
             throw new NotImplementedException();
@@ -107,6 +106,11 @@ namespace Persistance.Repositories
             //    connection.Open();
             //    connection.Update(tableName, parameters);
             //}
+        }
+
+        internal virtual dynamic Mapping(T item)
+        {
+            return item;
         }
     }
 }

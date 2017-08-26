@@ -10,7 +10,9 @@ namespace Persistance
 {
     public class MovieRepository : Repository<Movie>, IMovieRepository
     {
-        public MovieRepository() : base("Movie") { }
+        public MovieRepository() : base("Movie")
+        {
+        }
 
         public override Movie FindByID(int id)
         {
@@ -20,7 +22,7 @@ namespace Persistance
             {
                 var sql = "SELECT m.*, "
                         + "g.Id Genres_Id, g.Name Genres_Name, "
-                        + "l.Id SpokenLanguages_Id, l.Code SpokenLanguages_Code, "
+                        + "l.Id SpokenLanguages_LanguageId, l.Code SpokenLanguages_Code, ml.OriginalLanguage SpokenLanguages_OriginalLanguage, "
                         + "c.Id ProductionCountries_Id, c.Code ProductionCountries_Code "
                         + $"FROM {tableName} m "
                         + "INNER JOIN MovieGenre mg on mg.MovieId = m.Id "

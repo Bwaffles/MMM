@@ -60,6 +60,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="MovieLanguageTests.cs" />
     <Compile Include="MovieTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
