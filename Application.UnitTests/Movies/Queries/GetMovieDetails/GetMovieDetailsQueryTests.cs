@@ -14,9 +14,9 @@ namespace Application.UnitTests.Movies.Queries.GetMovieDetails
         [TestClass]
         public class ExecuteTests
         {
-            Mock<IMovieRepository> Repository;
-            GetMovieDetailsQuery Target;
-            TestMovie TestMovie;
+            private Mock<IMovieRepository> Repository;
+            private GetMovieDetailsQuery Target;
+            private TestMovie TestMovie;
 
             [TestInitialize]
             public void BeforeEachTest()
@@ -30,6 +30,19 @@ namespace Application.UnitTests.Movies.Queries.GetMovieDetails
             }
 
             [TestMethod]
+            public void GenresIsEmpty_ReturnsGenresAsAnEmptyString()
+            {
+                TestMovie.Movie.Genres = new List<Genre>();
+                Execute().Genres.Should().Be(string.Empty);
+            }
+
+            [TestMethod]
+            public void GenresIsNotEmpty_ReturnsGenresAsCommaDelimitedList()
+            {
+                Execute().Genres.Should().Be("1, 2");
+            }
+
+            [TestMethod]
             public void MovieDoesNotExist_ReturnsNull()
             {
                 Repository.Setup(repo => repo.FindByID(It.IsAny<int>())).Returns((Movie)null);
@@ -37,17 +50,18 @@ namespace Application.UnitTests.Movies.Queries.GetMovieDetails
             }
 
             [TestMethod]
+            public void MovieExists_BudgetFormattedAsMonetaryValue()
+            {
+                Execute().Budget.Should().Be("$10,000");
+            }
+
+            [TestMethod]
             public void MovieExists_ReturnsPopulatedItem()
             {
                 var actual = Execute();
 
-                actual.Budget.Should().Be(TestMovie.Budget);
-                actual.Genres.Should().Be("1, 2");
                 actual.Overview.Should().Be(TestMovie.Overview);
                 actual.PosterPath.Should().Be(TestMovie.PosterPath);
-                actual.ReleaseDate.Should().Be(TestMovie.ReleaseDate);
-                actual.Revenue.Should().Be(TestMovie.Revenue);
-                actual.Runtime.Should().Be(TestMovie.Runtime);
                 actual.Status.Should().Be(TestMovie.Status);
                 actual.Tagline.Should().Be(TestMovie.Tagline);
                 actual.Title.Should().Be($"{TestMovie.Title} ({TestMovie.ReleaseDate?.Year})");
@@ -56,17 +70,35 @@ namespace Application.UnitTests.Movies.Queries.GetMovieDetails
             }
 
             [TestMethod]
-            public void MovieWithNoGenres_GenreIsAnEmptyString()
+            public void ReleaseDateIsNotNull_ReturnsFormattedReleaseDateString()
             {
-                TestMovie.Movie.Genres = new List<Genre>();
-                Execute().Genres.Should().Be(string.Empty);
+                Execute().ReleaseDate.Should().Be("January 01, 2000");
             }
 
             [TestMethod]
-            public void MovieWithNoReleaseDate_TitleHasBracketsWithEmptyStringInside()
+            public void ReleaseDateIsNull_ReturnsTitleWithBracketsWithEmptyStringInside()
             {
                 TestMovie.Movie.ReleaseDate = null;
                 Execute().Title.Should().Be($"{TestMovie.Title} ()");
+            }
+
+            [TestMethod]
+            public void ReventIsNotNull_ReturnsRevenueFormattedAsMonetaryValue()
+            {
+                Execute().Revenue.Should().Be("$5,000");
+            }
+
+            [TestMethod]
+            public void RuntimeIsNotNull_ReturnsRuntimeFormattedAsHoursAndMinutes()
+            {
+                Execute().Runtime.Should().Be("2hr 3min");
+            }
+
+            [TestMethod]
+            public void RuntimeIsNull_ReturnsRuntimeAsAnEmptyString()
+            {
+                TestMovie.Movie.Runtime = null;
+                Execute().Runtime.Should().Be("Unknown");
             }
 
             private MovieDetailsModel Execute()
