@@ -19,13 +19,16 @@ namespace Persistance
             using (var connection = Connection)
             {
                 var sql = "SELECT m.*, "
-                        + "g.Id as Genres_Id, g.Name as Genres_Name, "
-                        + "l.Id as SpokenLanguages_Id, l.Code SpokenLanguages_Code "
+                        + "g.Id Genres_Id, g.Name Genres_Name, "
+                        + "l.Id SpokenLanguages_Id, l.Code SpokenLanguages_Code, "
+                        + "c.Id ProductionCountries_Id, c.Code ProductionCountries_Code "
                         + $"FROM {tableName} m "
                         + "INNER JOIN MovieGenre mg on mg.MovieId = m.Id "
                         + "INNER JOIN Genre g on g.Id = mg.GenreId "
                         + "INNER JOIN MovieLanguage ml on ml.MovieId = m.Id "
                         + "INNER JOIN Language l on l.Id = ml.LanguageId "
+                        + "INNER JOIN MovieCountry mc on mc.MovieId = m.Id "
+                        + "INNER JOIN Country c on c.Id = mc.CountryId "
                         + "WHERE m.Id = @Id";
 
                 connection.Open();

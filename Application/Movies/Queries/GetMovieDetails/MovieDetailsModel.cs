@@ -11,6 +11,8 @@ namespace Application.Movies.Queries.GetMovieDetails
         public string Languages { get; set; }
         public string Overview { get; set; }
         public string PosterPath { get; set; }
+        [Display(Name ="Produced In")]
+        public string ProductionCountries { get; set; }
         public DateTime? ReleaseDate { get; set; }
         public long Revenue { get; set; }
         public int? Runtime { get; set; }

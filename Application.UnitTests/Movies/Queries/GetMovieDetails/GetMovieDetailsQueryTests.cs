@@ -52,6 +52,7 @@ namespace Application.UnitTests.Movies.Queries.GetMovieDetails
                 actual.Tagline.Should().Be(TestMovie.Tagline);
                 actual.Title.Should().Be($"{TestMovie.Title} ({TestMovie.ReleaseDate?.Year})");
                 actual.Languages.Should().Be("English, Spanish");
+                actual.ProductionCountries.Should().Be("United States, Canada");
             }
 
             [TestMethod]

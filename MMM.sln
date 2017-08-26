@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.UnitTests", "Application.UnitTests\Application.UnitTests.csproj", "{A3E099C6-C17C-4990-A820-C1AFE27B780F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.UnitTests", "Domain.UnitTests\Domain.UnitTests.csproj", "{1F8196C7-618D-41BB-91A0-E7F4877C7219}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{A3E099C6-C17C-4990-A820-C1AFE27B780F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3E099C6-C17C-4990-A820-C1AFE27B780F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3E099C6-C17C-4990-A820-C1AFE27B780F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F8196C7-618D-41BB-91A0-E7F4877C7219}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F8196C7-618D-41BB-91A0-E7F4877C7219}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F8196C7-618D-41BB-91A0-E7F4877C7219}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F8196C7-618D-41BB-91A0-E7F4877C7219}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

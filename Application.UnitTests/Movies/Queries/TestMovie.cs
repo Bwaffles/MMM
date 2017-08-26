@@ -16,6 +16,7 @@ namespace Application.UnitTests.Movies.Queries
         public readonly string Tagline = "My tagline";
         public readonly string Title = "My Title";
         public readonly int Id = 1;
+        public readonly IEnumerable<Country> ProductionCountries = new List<Country>() { new Country() { Id = 1, Code = "US" }, new Country() { Id = 2, Code = "CA" } };
 
         public Movie Movie { get; }
 
@@ -34,7 +35,8 @@ namespace Application.UnitTests.Movies.Queries
                 Tagline = Tagline,
                 Title = Title,
                 Genres = new List<Genre>() { new Genre() { Name = "1" }, new Genre() { Name = "2" } },
-                SpokenLanguages = new List<Language>() { new Language() { Code = "en" }, new Language() { Code = "es" } }
+                SpokenLanguages = new List<Language>() { new Language() { Code = "en" }, new Language() { Code = "es" } },
+                ProductionCountries = ProductionCountries
             };
         }
     }

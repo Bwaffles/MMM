@@ -16,6 +16,7 @@ namespace Domain
         public string Overview { get; set; }
         public double Popularity { get; set; }
         public string PosterPath { get; set; }
+        public IEnumerable<Country> ProductionCountries { get; set; }
         public DateTime? ReleaseDate { get; set; }
         public long Revenue { get; set; }
         public int? Runtime { get; set; }
