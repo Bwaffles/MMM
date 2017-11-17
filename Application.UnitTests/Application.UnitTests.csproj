@@ -52,6 +52,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
@@ -71,6 +72,8 @@
     <Compile Include="Movies\Queries\GetMovieDetails\GetMovieDetailsQueryTests.cs" />
     <Compile Include="Movies\Queries\GetMoviesList\GetMoviesListQueryTests.cs" />
     <Compile Include="Movies\Queries\TestMovie.cs" />
+    <Compile Include="People\Queries\GetPeopleList\GetPeopleListQueryTests.cs" />
+    <Compile Include="People\Queries\GetPeopleList\PeopleListItemModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -81,9 +84,17 @@
       <Project>{03622A96-547F-444F-B66B-563503F0D765}</Project>
       <Name>Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Domain.UnitTests\Domain.UnitTests.csproj">
+      <Project>{1F8196C7-618D-41BB-91A0-E7F4877C7219}</Project>
+      <Name>Domain.UnitTests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{F5956343-B6D5-4FF8-AE09-543E4C809B08}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Presentation\Presentation.csproj">
+      <Project>{9E982EBA-DC2A-446B-BCB0-5678857C5A4D}</Project>
+      <Name>Presentation</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

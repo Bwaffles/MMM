@@ -62,7 +62,9 @@
   <ItemGroup>
     <Compile Include="MovieLanguageTests.cs" />
     <Compile Include="MovieTests.cs" />
+    <Compile Include="PersonTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestPerson.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">

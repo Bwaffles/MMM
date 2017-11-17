@@ -42,11 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Country.cs" />
+    <Compile Include="PersonGender.cs" />
     <Compile Include="Genre.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="MovieLanguage.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

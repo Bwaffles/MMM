@@ -49,7 +49,11 @@
     <Compile Include="Movies\Queries\GetMovieDetails\IGetMovieDetailsQuery.cs" />
     <Compile Include="Movies\Queries\GetMovieDetails\MovieDetailsModel.cs" />
     <Compile Include="Movies\IMovieRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="People\IPersonRepository.cs" />
+    <Compile Include="People\Queries\GetPeopleList\GetPeopleListQuery.cs" />
+    <Compile Include="People\Queries\GetPeopleList\IGetPeopleListQuery.cs" />
+    <Compile Include="People\Queries\GetPeopleList\PeopleListItemModel.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Movies\Queries\GetMoviesList\GetMoviesListQuery.cs" />
     <Compile Include="Movies\Queries\GetMoviesList\IGetMoviesListQuery.cs" />
     <Compile Include="Movies\Queries\GetMoviesList\MoviesListItemModel.cs" />
@@ -64,6 +68,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

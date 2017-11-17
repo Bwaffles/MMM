@@ -12,9 +12,9 @@ namespace Application.UnitTests.Movies.Queries.GetMoviesList
     [TestClass]
     public class GetMoviesListQueryTests
     {
-        Mock<IMovieRepository> Repository;
-        GetMoviesListQuery Target;
-        TestMovie TestMovie;
+        private Mock<IMovieRepository> Repository;
+        private GetMoviesListQuery Target;
+        private TestMovie TestMovie;
 
         [TestInitialize]
         public void BeforeEachTest()
@@ -38,17 +38,17 @@ namespace Application.UnitTests.Movies.Queries.GetMoviesList
         }
 
         [TestMethod]
-        public void NoMoviesExist_ReturnsEmptyEnumerable()
-        {
-            Repository.Setup(repo => repo.FindAll()).Returns(new List<Movie>());
-            Execute().Should().BeEmpty();
-        }
-
-        [TestMethod]
         public void MovieWithNoReleaseDate_TitleHasBracketsWithEmptyStringInside()
         {
             TestMovie.Movie.ReleaseDate = null;
             Execute().First().Title.Should().Be($"{TestMovie.Title} ()");
+        }
+
+        [TestMethod]
+        public void NoMoviesExist_ReturnsEmptyEnumerable()
+        {
+            Repository.Setup(repo => repo.FindAll()).Returns(new List<Movie>());
+            Execute().Should().BeEmpty();
         }
 
         private IEnumerable<MoviesListItemModel> Execute()
