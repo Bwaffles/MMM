@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
+    [Table("Person")]
     public class Person : IEntity
     {
         public string Biography { get; set; }
@@ -14,7 +16,7 @@ namespace Domain
         public string ImdbId { get; set; }
         public string Name { get; set; }
         public double Popularity { get; set; }
-        public string PosterPath { get; set; }
+        public string ProfilePath { get; set; }
         public int TMDBId { get; set; }
     }
 }
