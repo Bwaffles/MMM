@@ -1,19 +1,16 @@
 ﻿using Application;
 using Dapper;
+using Dapper.Contrib.Extensions;
 using Domain;
-using Slapper;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace Persistance.Repositories
 {
-    public abstract class Repository<T> : IRepository<T> where T : IEntity
+    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
     {
         protected readonly string tableName;
 
@@ -27,90 +24,81 @@ namespace Persistance.Repositories
 
         public Repository(string tableName)
         {
-            this.tableName = tableName;
-
-            AutoMapper.Configuration.IdentifierAttributeType = typeof(KeyAttribute);
+            this.tableName = $"{tableName}";
         }
 
-        public virtual void Add(T item)
+        public virtual void Add(TEntity item)
         {
-            throw new NotImplementedException();
-            //using (IDbConnection connection = Connection)
-            //{
-            //    var parameters = (object)Mapping(item);
-            //    connection.Open();
-            //    item.Id = connection.Insert<int>(tableName, parameters);
-            //}
+            using (var connection = Connection)
+                connection.Insert(item);
         }
 
-        public virtual IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
+        //public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        //{
+        //    IEnumerable<TEntity> items = null;
+        //    using (var connection = Connection)
+        //    {
+        //        connection.Open();
+        //        var predicate = Predicates.Field<Person>(f => f.Active, Operator.Eq, true);
+        //        items = connection.Query<T>(result.Sql, (object)result.Param);
+
+        //        connection.Close();
+        //    }
+        //    return items;
+
+        //    //IEnumerable<T> items = null;
+
+        //    //// extract the dynamic sql query and parameters from predicate
+        //    //QueryResult result = DynamicQuery.GetDynamicQuery(tableName, predicate);
+
+        //    //using (IDbConnection connection = Connection)
+        //    //{
+        //    //    connection.Open();
+        //    //    items = connection.Query<T>(result.Sql, (object)result.Param);
+        //    //}
+
+        //    //return items;
+        //}
+
+        public virtual IEnumerable<TEntity> FindAll()
         {
-            throw new NotImplementedException();
-            //IEnumerable<T> items = null;
-
-            //// extract the dynamic sql query and parameters from predicate
-            //QueryResult result = DynamicQuery.GetDynamicQuery(tableName, predicate);
-
-            //using (IDbConnection connection = Connection)
-            //{
-            //    connection.Open();
-            //    items = connection.Query<T>(result.Sql, (object)result.Param);
-            //}
-
-            //return items;
-        }
-
-        public virtual IEnumerable<T> FindAll()
-        {
-            IEnumerable<T> items = null;
+            IEnumerable<TEntity> items = null;
 
             using (IDbConnection connection = Connection)
             {
                 connection.Open();
-                items = connection.Query<T>("SELECT * FROM " + tableName);
+                items = connection.Query<TEntity>("SELECT * FROM " + tableName);
+                connection.Close();
             }
 
             return items;
         }
 
         //TODO: no nulls-- look into optional object
-        public virtual T FindByID(int id)
+        public virtual TEntity FindByID(int id)
         {
-            T item = default(T);
+            TEntity item = default(TEntity);
 
             using (IDbConnection connection = Connection)
             {
                 connection.Open();
-                item = connection.Query<T>("SELECT * FROM " + tableName + " WHERE Id=@Id", new { Id = id }).SingleOrDefault();
+                item = connection.Query<TEntity>("SELECT * FROM " + tableName + " WHERE Id=@Id", new { Id = id }).SingleOrDefault();
+                connection.Close();
             }
 
             return item;
         }
 
-        public virtual void Remove(T item)
+        public virtual void Remove(TEntity item)
         {
-            throw new NotImplementedException();
-            //using (IDbConnection connection = Connection)
-            //{
-            //    connection.Open();
-            //    connection.Execute("DELETE FROM " + tableName + " WHERE Id=@Id", new { Id = item.Id });
-            //}
+            using (IDbConnection connection = Connection)
+                connection.Delete(item);
         }
 
-        public virtual void Update(T item)
+        public virtual void Update(TEntity item)
         {
-            throw new NotImplementedException();
-            //using (IDbConnection connection = Connection)
-            //{
-            //    var parameters = (object)Mapping(item);
-            //    connection.Open();
-            //    connection.Update(tableName, parameters);
-            //}
-        }
-
-        internal virtual dynamic Mapping(T item)
-        {
-            return item;
+            using (IDbConnection connection = Connection)
+                connection.Update(item);
         }
     }
 }
