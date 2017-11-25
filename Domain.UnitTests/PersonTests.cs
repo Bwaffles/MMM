@@ -85,10 +85,10 @@ namespace Domain.UnitTests
         }
 
         [TestMethod]
-        public void GetAndSetPosterPath()
+        public void GetAndSetProfilePath()
         {
-            Target.Person.PosterPath = TestPerson.PosterPath;
-            Target.Person.PosterPath.Should().Be(TestPerson.PosterPath);
+            Target.Person.ProfilePath = TestPerson.ProfilePath;
+            Target.Person.ProfilePath.Should().Be(TestPerson.ProfilePath);
         }
 
         [TestMethod]

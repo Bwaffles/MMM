@@ -12,7 +12,7 @@ namespace Domain.UnitTests
         public const string ImdbId = "nm0000012";
         public const string Name = "Tony Guy";
         public const double Popularity = 2.1234567;
-        public const string PosterPath = "/jkl421mkldsan.jpg";
+        public const string ProfilePath = "/jkl421mkldsan.jpg";
         public const int TMDBId = 1;
         public static readonly DateTime? Birthday = new DateTime(1944, 12, 13);
         public static readonly DateTime? Deathday = new DateTime(2017, 4, 21);
@@ -32,7 +32,7 @@ namespace Domain.UnitTests
                 ImdbId = ImdbId,
                 Name = Name,
                 Popularity = Popularity,
-                PosterPath = PosterPath,
+                ProfilePath = ProfilePath,
                 TMDBId = TMDBId
             };
         }
