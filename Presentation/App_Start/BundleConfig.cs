@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace MMM
 {
@@ -19,12 +18,13 @@ namespace MMM
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+            bundles.Add(new ScriptBundle("~/bundles/semantic").Include(
+                      "~/semantic/out/semantic.min.js"));
+
+            bundles.Add(new StyleBundle("~/semantic").Include(
+                      "~/semantic/out/semantic.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
                       "~/Content/site.css"));
         }
     }
