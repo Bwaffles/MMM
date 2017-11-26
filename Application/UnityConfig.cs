@@ -1,5 +1,8 @@
+using Common;
 using Microsoft.Practices.Unity;
+using Services.TMDb;
 using System;
+using System.Linq;
 
 namespace Application
 {
@@ -29,13 +32,22 @@ namespace Application
         /// change the defaults), as Unity allows resolving a concrete type even if it was not previously registered.</remarks>
         public static void RegisterTypes(IUnityContainer container)
         {
-            // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
-            // container.LoadConfiguration();
-
+            // Register All Types by Convention by default
             container.RegisterTypes(
                 AllClasses.FromLoadedAssemblies(),
                 WithMappings.FromMatchingInterface,
-                WithName.Default);
+                WithName.Default,
+                WithLifetime.Transient);
+
+            // Overwrite All Types marked as Singleton
+            container.RegisterTypes(
+                AllClasses.FromLoadedAssemblies()
+                    .Where(t => t.GetCustomAttributes(typeof(SingletonAttribute), true).Any()),
+                WithMappings.FromMatchingInterface,
+                WithName.Default,
+                WithLifetime.ContainerControlled,
+                null,
+                true); // Overwrite existing mappings without throwing
         }
     }
 }
