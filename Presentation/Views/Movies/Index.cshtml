@@ -15,7 +15,7 @@
     @foreach (var item in Model)
     {
         <div class="item">
-            <img class="ui avatar image" src="" />
+            <img class="ui image" width="92" src="@Html.DisplayFor(modelItem => item.PosterUrl)" alt="No Image" />
             <div class="content">
                 <h3>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToString(), "Details", new { id = item.Id }, new { @class = "header" })</h3>
                 <div class="description">

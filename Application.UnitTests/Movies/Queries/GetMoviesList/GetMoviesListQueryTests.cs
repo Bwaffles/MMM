@@ -4,6 +4,7 @@ using Domain;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Services.TMDb;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,6 +16,7 @@ namespace Application.UnitTests.Movies.Queries.GetMoviesList
         private Mock<IMovieRepository> Repository;
         private GetMoviesListQuery Target;
         private TestMovie TestMovie;
+        private Mock<ITMDbService> TMDbService;
 
         [TestInitialize]
         public void BeforeEachTest()
@@ -24,7 +26,18 @@ namespace Application.UnitTests.Movies.Queries.GetMoviesList
             Repository = new Mock<IMovieRepository>();
             Repository.Setup(repo => repo.FindAll()).Returns(new List<Movie> { TestMovie.Movie });
 
-            Target = new GetMoviesListQuery(Repository.Object);
+            TMDbService = new Mock<ITMDbService>();
+
+            Target = new GetMoviesListQuery(Repository.Object, TMDbService.Object);
+        }
+
+        [TestMethod]
+        public void MovieExists_PosterUrlShouldBeSetToGetImagePathResult()
+        {
+            TMDbService.Setup(service => service.GetImagePath(It.IsAny<string>(), TestMovie.PosterPath)).Returns(TestMovie.PosterPath);
+
+            var actual = Execute().First();
+            actual.PosterUrl.Should().Be(TestMovie.PosterPath);
         }
 
         [TestMethod]
