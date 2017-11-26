@@ -11,12 +11,16 @@
     </style>
 </head>
 <body>
+    @{
+        var pageName = ViewContext.RouteData.Values["controller"].ToString();
+        var movieActive = pageName == "Movies" ? "active" : null;
+        var personActive = pageName == "Person" ? "active" : null;
+    }
     <div class="ui fixed inverted menu" style="height:65px">
         <div class="ui container">
-            @Html.ActionLink("MMM", "Index", "Home", null, new { @class = "header item" })
-            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "item" })
-            @Html.ActionLink("Movies", "Index", "Movies", null, new { @class = "item" })
-            @Html.ActionLink("People", "Index", "Person", null, new { @class = "item" })
+            @Html.ActionLink("MML", "Index", "Home", null, new { @class = "header item" })
+            <a class="@movieActive blue item" href="@Url.Action("Index", "Movies")">Movies</a>
+            <a class="@personActive blue item" href="@Url.Action("Index", "Person")">People</a>
             <div class="right menu">
                 @Html.Partial("_LoginPartial")
             </div>
@@ -25,9 +29,9 @@
     <div class="ui main container">
         @RenderBody()
     </div>
-    <div class="ui inverted vertical footer segment">
+    <div class="ui inverted footer segment">
         <div class="ui center aligned container">
-            <p>&copy; @DateTime.Now.Year - Mega Media Manager</p>
+            <p>&copy; @DateTime.Now.Year - My Movie List</p>
         </div>
     </div>
 

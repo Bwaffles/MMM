@@ -4,10 +4,24 @@
     ViewBag.Title = "Movies";
 }
 
-<h2>Movies</h2>
-
-@foreach (var item in Model)
-{
-    <h3>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToString(), "Details", new { id = item.Id }, new { @style = "color:gray" })</h3>
-    <label>@Html.DisplayFor(modelItem => item.Tagline)</label>
-}
+<h1 class="ui header">
+    <i class="film icon"></i>
+    <div class="content">
+        Movies
+    </div>
+</h1>
+<br />
+<div class="ui big very relaxed divided list">
+    @foreach (var item in Model)
+    {
+        <div class="item">
+            <img class="ui avatar image" src="" />
+            <div class="content">
+                <h3>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToString(), "Details", new { id = item.Id }, new { @class = "header" })</h3>
+                <div class="description">
+                    @Html.DisplayFor(modelItem => item.Tagline)
+                </div>
+            </div>
+        </div>
+    }
+</div>
