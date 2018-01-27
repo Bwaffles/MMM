@@ -15,16 +15,17 @@ namespace Application.UnitTests.Movies.Queries.GetMoviesList
     {
         private Mock<IMovieRepository> Repository;
         private GetMoviesListQuery Target;
-        private TestMovie TestMovie;
+        private MovieTestData TestMovie;
         private Mock<ITMDbService> TMDbService;
+        private int UserId = 1;
 
         [TestInitialize]
         public void BeforeEachTest()
         {
-            TestMovie = new TestMovie();
+            TestMovie = new MovieTestData();
 
             Repository = new Mock<IMovieRepository>();
-            Repository.Setup(repo => repo.FindAll()).Returns(new List<Movie> { TestMovie.Movie });
+            Repository.Setup(repo => repo.FindAllByUser(UserId)).Returns(new List<Movie> { TestMovie.Movie });
 
             TMDbService = new Mock<ITMDbService>();
 
@@ -48,6 +49,7 @@ namespace Application.UnitTests.Movies.Queries.GetMoviesList
             actual.Id.Should().Be(TestMovie.Id);
             actual.Tagline.Should().Be(TestMovie.Tagline);
             actual.Title.Should().Be($"{TestMovie.Title} ({TestMovie.ReleaseDate?.Year})");
+            actual.WatchCount.Should().Be(TestMovie.WatchCount);
         }
 
         [TestMethod]
@@ -60,13 +62,13 @@ namespace Application.UnitTests.Movies.Queries.GetMoviesList
         [TestMethod]
         public void NoMoviesExist_ReturnsEmptyEnumerable()
         {
-            Repository.Setup(repo => repo.FindAll()).Returns(new List<Movie>());
+            Repository.Setup(repo => repo.FindAllByUser(UserId)).Returns(Enumerable.Empty<Movie>);
             Execute().Should().BeEmpty();
         }
 
         private IEnumerable<MoviesListItemModel> Execute()
         {
-            return Target.Execute();
+            return Target.Execute(UserId);
         }
     }
 }

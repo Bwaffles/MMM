@@ -16,12 +16,12 @@ namespace Application.UnitTests.Movies.Queries.GetMovieDetails
         {
             private Mock<IMovieRepository> Repository;
             private GetMovieDetailsQuery Target;
-            private TestMovie TestMovie;
+            private MovieTestData TestMovie;
 
             [TestInitialize]
             public void BeforeEachTest()
             {
-                TestMovie = new TestMovie();
+                TestMovie = new MovieTestData();
 
                 Repository = new Mock<IMovieRepository>();
                 Repository.Setup(repo => repo.FindByID(It.IsAny<int>())).Returns(TestMovie.Movie);

@@ -6,5 +6,6 @@
         public string PosterUrl { get; set; }
         public string Tagline { get; set; }
         public string Title { get; set; }
+        public int WatchCount { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Application.UnitTests.Movies.Queries
 {
-    public class TestMovie
+    public class MovieTestData
     {
         public readonly long Budget = 10000;
         public readonly int Id = 1;
@@ -18,9 +18,11 @@ namespace Application.UnitTests.Movies.Queries
         public readonly string Status = "Released";
         public readonly string Tagline = "My tagline";
         public readonly string Title = "My Title";
+        public readonly int WatchCount = 3;
+
         public Movie Movie { get; }
 
-        public TestMovie()
+        public MovieTestData()
         {
             Movie = new Movie()
             {
@@ -36,8 +38,14 @@ namespace Application.UnitTests.Movies.Queries
                 Title = Title,
                 Genres = new List<Genre>() { new Genre() { Name = "1" }, new Genre() { Name = "2" } },
                 SpokenLanguages = SpokenLanguages,
-                ProductionCountries = ProductionCountries
+                ProductionCountries = ProductionCountries,
             };
+
+            var watches = new List<UserMovieWatch>();
+            for (int i = 0; i < WatchCount; i++)
+                watches.Add( new UserMovieWatch { Id = i, MovieId = Id, UserId = 1, Number = i });
+
+            Movie.Watches = watches;
         }
     }
 }

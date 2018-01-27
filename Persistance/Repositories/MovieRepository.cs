@@ -14,10 +14,22 @@ namespace Persistance
         {
         }
 
+        public IEnumerable<Movie> FindAllByUser(int? userId)
+        {
+            using (var connection = Connection)
+            {
+                var sql = "SELECT m.*, "
+                        + "umw.Id Watches_Id "
+                       + $"FROM {tableName} m "
+                        + "LEFT JOIN UserMovieWatch umw on umw.MovieId = m.Id and umw.UserId = @UserId";
+
+                var query = connection.Query(sql, new { UserId = userId }) as IEnumerable<IDictionary<string, object>>;
+                return AutoMapper.Map<Movie>(query);
+            }
+        }
+
         public override Movie FindByID(int id)
         {
-            Movie item;
-
             using (var connection = Connection)
             {
                 var sql = "SELECT m.*, "
@@ -33,12 +45,9 @@ namespace Persistance
                         + "LEFT JOIN Country c on c.Id = mc.CountryId "
                         + "WHERE m.Id = @Id";
 
-                connection.Open();
                 var query = connection.Query(sql, new { Id = id }) as IEnumerable<IDictionary<string, object>>;
-                item = AutoMapper.Map<Movie>(query).SingleOrDefault();
+                return AutoMapper.Map<Movie>(query).SingleOrDefault();
             }
-
-            return item;
         }
     }
 }

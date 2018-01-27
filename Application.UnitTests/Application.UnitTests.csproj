@@ -71,7 +71,7 @@
   <ItemGroup>
     <Compile Include="Movies\Queries\GetMovieDetails\GetMovieDetailsQueryTests.cs" />
     <Compile Include="Movies\Queries\GetMoviesList\GetMoviesListQueryTests.cs" />
-    <Compile Include="Movies\Queries\TestMovie.cs" />
+    <Compile Include="Movies\Queries\MovieTestData.cs" />
     <Compile Include="People\Queries\GetPeopleList\GetPeopleListQueryTests.cs" />
     <Compile Include="People\Queries\GetPeopleList\PeopleListItemModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

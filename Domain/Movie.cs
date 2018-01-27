@@ -23,5 +23,6 @@ namespace Domain
         public string Status { get; set; }
         public string Tagline { get; set; }
         public string Title { get; set; }
+        public IEnumerable<UserMovieWatch> Watches { get; set; }
     }
 }

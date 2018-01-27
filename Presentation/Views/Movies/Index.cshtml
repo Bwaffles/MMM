@@ -22,6 +22,17 @@
                     @Html.DisplayFor(modelItem => item.Tagline)
                 </div>
             </div>
+            <div class="right floated content">
+                @if (item.WatchCount > 0)
+                {
+                    <i class="big blue checkmark box icon"></i>
+                    @item.WatchCount
+                }
+                else
+                {
+                    <i class="big grey square outline icon"></i>
+                }
+            </div>
         </div>
     }
 </div>

@@ -1,5 +1,6 @@
 ﻿using Application.Movies.Queries.GetMovieDetails;
 using Application.Movies.Queries.GetMoviesList;
+using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
 
 namespace Presentation.Controllers
@@ -18,7 +19,10 @@ namespace Presentation.Controllers
         // GET: Movies
         public ActionResult Index()
         {
-            return View(moviesListQuery.Execute());
+            //TODO: find a better way to get the user ID since this is supposed to be unit tested
+            int temp;
+            var userId = int.TryParse(User.Identity.GetUserId(), out temp) ? temp : (int?)null;
+            return View(moviesListQuery.Execute(userId));
         }
 
         // GET: Movies/Details/5

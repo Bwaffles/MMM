@@ -17,15 +17,17 @@ namespace Application.Movies.Queries.GetMoviesList
             this.tmdbService = tmdbService;
         }
 
-        public IEnumerable<MoviesListItemModel> Execute()
+        public IEnumerable<MoviesListItemModel> Execute(int? userId)
         {
             TypeAdapterConfig<Movie, MoviesListItemModel>
                 .NewConfig()
                 .Map(dest => dest.Title,
                      src => string.Format("{0} ({1})", src.Title, (src.ReleaseDate.HasValue ? src.ReleaseDate.Value.Year.ToString() : string.Empty)))
-                .Map(dest => dest.PosterUrl, src => tmdbService.GetImagePath(PosterSize.Smallest, src.PosterPath));
+                .Map(dest => dest.PosterUrl, src => tmdbService.GetImagePath(PosterSize.Smallest, src.PosterPath))
+                .Map(dest => dest.WatchCount, src => src.Watches.Count())
+                ;
 
-            return movieRepository.FindAll().AsQueryable().ProjectToType<MoviesListItemModel>();
+            return movieRepository.FindAllByUser(userId).AsQueryable().ProjectToType<MoviesListItemModel>();
         }
     }
 }
