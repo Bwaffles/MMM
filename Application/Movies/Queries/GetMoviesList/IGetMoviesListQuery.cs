@@ -4,6 +4,6 @@ namespace Application.Movies.Queries.GetMoviesList
 {
     public interface IGetMoviesListQuery
     {
-        IEnumerable<MoviesListItemModel> Execute(int? userId);
+        IEnumerable<MoviesListItemModel> Execute();
     }
 }

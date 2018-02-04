@@ -10,14 +10,16 @@ namespace Application.Movies.Queries.GetMoviesList
     {
         private IMovieRepository movieRepository;
         private ITMDbService tmdbService;
+        private ICurrentUser user;
 
-        public GetMoviesListQuery(IMovieRepository movieRepository, ITMDbService tmdbService)
+        public GetMoviesListQuery(IMovieRepository movieRepository, ITMDbService tmdbService, ICurrentUser user)
         {
             this.movieRepository = movieRepository;
             this.tmdbService = tmdbService;
+            this.user = user;
         }
 
-        public IEnumerable<MoviesListItemModel> Execute(int? userId)
+        public IEnumerable<MoviesListItemModel> Execute()
         {
             TypeAdapterConfig<Movie, MoviesListItemModel>
                 .NewConfig()
@@ -27,7 +29,7 @@ namespace Application.Movies.Queries.GetMoviesList
                 .Map(dest => dest.WatchCount, src => src.Watches.Count())
                 ;
 
-            return movieRepository.FindAllByUser(userId).AsQueryable().ProjectToType<MoviesListItemModel>();
+            return movieRepository.FindAllByUser(user.UserID).AsQueryable().ProjectToType<MoviesListItemModel>();
         }
     }
 }
