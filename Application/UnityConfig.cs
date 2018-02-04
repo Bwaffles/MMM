@@ -1,8 +1,9 @@
 using Common;
 using Microsoft.Practices.Unity;
-using Services.TMDb;
 using System;
 using System.Linq;
+using System.Security.Principal;
+using System.Web;
 
 namespace Application
 {
@@ -48,6 +49,8 @@ namespace Application
                 WithLifetime.ContainerControlled,
                 null,
                 true); // Overwrite existing mappings without throwing
+
+            container.RegisterType<IIdentity>(new InjectionFactory(_ => HttpContext.Current.User.Identity));
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Persistance
         {
         }
 
-        public IEnumerable<Movie> FindAllByUser(int? userId)
+        public IEnumerable<Movie> FindAllByUser(int userId)
         {
             using (var connection = Connection)
             {

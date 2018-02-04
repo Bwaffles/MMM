@@ -25,3 +25,17 @@ textarea {
     margin: 5em 0em 0em;
     padding: 5em 0em;
 }
+
+/* For making text match the color of the icons--not sure how to make it inherit the actual color so I've just hard coded this here for now*/
+i.icons .iconText {
+    top: auto;
+    left: 25px;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    font-size: 0.65em;
+    margin: 0;
+    color: #2185d0;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff;
+}

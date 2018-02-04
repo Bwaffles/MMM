@@ -6,9 +6,9 @@
 
 <h1 class="ui header">
     <i class="film icon"></i>
-    <div class="content">
+    <span class="content">
         Movies
-    </div>
+    </span>
 </h1>
 <br />
 <div class="ui big very relaxed divided list">
@@ -25,12 +25,16 @@
             <div class="right floated content">
                 @if (item.WatchCount > 0)
                 {
-                    <i class="big blue checkmark box icon"></i>
-                    @item.WatchCount
+                    <i class="big icons" title="You've watched this movie @item.WatchCount times">
+                        <i class="blue unhide icon"></i>
+                        <span class="iconText">@item.WatchCount</span>
+                    </i>
                 }
                 else
                 {
-                    <i class="big grey square outline icon"></i>
+                    <i class="big icons" title="You haven't watched this movie yet... why not?">
+                        <i class="inverted grey unhide icon"></i>
+                    </i>
                 }
             </div>
         </div>

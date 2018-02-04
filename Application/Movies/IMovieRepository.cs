@@ -5,6 +5,6 @@ namespace Application.Movies
 {
     public interface IMovieRepository : IRepository<Movie>
     {
-        IEnumerable<Movie> FindAllByUser(int? userId);
+        IEnumerable<Movie> FindAllByUser(int userId);
     }
 }

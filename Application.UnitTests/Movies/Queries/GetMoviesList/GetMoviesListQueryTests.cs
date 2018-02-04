@@ -1,6 +1,7 @@
 ﻿using Application.Movies;
 using Application.Movies.Queries.GetMoviesList;
 using Domain;
+using Domain.UnitTests;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -17,7 +18,6 @@ namespace Application.UnitTests.Movies.Queries.GetMoviesList
         private GetMoviesListQuery Target;
         private MovieTestData TestMovie;
         private Mock<ITMDbService> TMDbService;
-        private int UserId = 1;
 
         [TestInitialize]
         public void BeforeEachTest()
@@ -25,11 +25,11 @@ namespace Application.UnitTests.Movies.Queries.GetMoviesList
             TestMovie = new MovieTestData();
 
             Repository = new Mock<IMovieRepository>();
-            Repository.Setup(repo => repo.FindAllByUser(UserId)).Returns(new List<Movie> { TestMovie.Movie });
+            Repository.Setup(repo => repo.FindAllByUser(It.IsAny<int>())).Returns(new List<Movie> { TestMovie.Movie });
 
             TMDbService = new Mock<ITMDbService>();
 
-            Target = new GetMoviesListQuery(Repository.Object, TMDbService.Object);
+            Target = new GetMoviesListQuery(Repository.Object, TMDbService.Object, new CurrentUserStub());
         }
 
         [TestMethod]
@@ -62,13 +62,13 @@ namespace Application.UnitTests.Movies.Queries.GetMoviesList
         [TestMethod]
         public void NoMoviesExist_ReturnsEmptyEnumerable()
         {
-            Repository.Setup(repo => repo.FindAllByUser(UserId)).Returns(Enumerable.Empty<Movie>);
+            Repository.Setup(repo => repo.FindAllByUser(It.IsAny<int>())).Returns(Enumerable.Empty<Movie>);
             Execute().Should().BeEmpty();
         }
 
         private IEnumerable<MoviesListItemModel> Execute()
         {
-            return Target.Execute(UserId);
+            return Target.Execute();
         }
     }
 }
